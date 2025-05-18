@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Product App{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f9f9f9;
+        }
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+        nav a {
+            margin-right: 15px;
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            margin-top: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gadget Galaxy</h1>
+        <nav>
+            <a href="{% url 'product_list' %}">Home</a>
+            <a href="{% url 'product_new' %}">Add Product</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ year|default:2025 }} - My Product App</p>
+    </footer>
+</body>
+</html>

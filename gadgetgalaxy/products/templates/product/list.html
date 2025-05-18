@@ -1,0 +1,24 @@
+{% extends "parent.html" %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+    <h2>Product List</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <strong>{{ product.name }}</strong> - ${{ product.price }}<br>
+                {{ product.description }}<br>
+                Stock: {{ product.stock }}<br>
+                SKU: {{ product.sku }}<br>
+                Category: {{ product.category.name }}<br>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-height: 100px;">
+                {% endif %}
+            </li>
+            <hr>
+        {% empty %}
+            <p>No products available.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -6,7 +6,7 @@ from category.models import Category
 class Products(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100,null=False)
-    description = models.CharField(max_length=200)
+    description = models.CharField(max_length=200 , null=True)
     price = models.DecimalField(max_digits=10 , decimal_places=2 , null=False)
     stock = models.IntegerField(null=False)
     image = models.ImageField(upload_to='products/imgs',blank=True,null=True)

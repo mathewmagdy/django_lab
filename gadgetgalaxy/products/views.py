@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
+from category.models import Category
 from products.models import Products
 
 # Create your views here.
@@ -28,7 +29,8 @@ def product_new(request):
             category_id=category_id
         )
         return redirect('product_list')
-    return render(request, 'product/new.html')
+    categories = Category.objects.all()
+    return render(request, 'product/new.html', {'categories': categories})
 
 
 def soft_delete_product(request, id):

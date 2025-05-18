@@ -23,8 +23,13 @@
         <label>SKU:</label><br>
         <input type="text" name="sku" required><br><br>
 
-        <label>Category ID:</label><br>
-        <input type="number" name="category_id" required><br><br>
+        <label>Category:</label><br>
+        <select name="category_id" required>
+            <option value="">-- Select a Category --</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select><br><br>
 
         <label>Image:</label><br>
         <input type="file" name="image"><br><br>

@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from category.models import Category
 from products.models import Products
@@ -40,3 +40,25 @@ def soft_delete_product(request, id):
 def hard_delete_product(request, id):
     Products.harddel(id)
     return redirect('product_list')
+
+def update_product(request, id):
+    product = get_object_or_404(Products, pk=id)
+    categories = Category.objects.all()
+
+    if request.method == 'POST':
+        product.name = request.POST.get('name')
+        product.price = request.POST.get('price')
+        product.description = request.POST.get('description')
+        product.stock = request.POST.get('stock')
+        product.sku = request.POST.get('sku')
+        product.category_id = request.POST.get('category_id')
+
+        # Handle optional image update
+        image = request.FILES.get('image')
+        if image:
+            product.image = image
+
+        product.save()
+        return redirect('product_list')
+
+    return render(request, 'product/update.html', {'product': product, 'categories': categories})

@@ -1,0 +1,42 @@
+{% extends 'parent.html' %}
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+<h2>Product List</h2>
+
+<ul>
+    {% for product in products %}
+        <li>
+            <strong>{{ product.name }}</strong> - {{ product.price }}EGP<br>
+            {{ product.description }}<br>
+            Stock: {{ product.stock }}<br>
+            SKU: {{ product.sku }}<br>
+            Category: {{ product.category.name }}<br>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-height: 100px;">
+            {% endif %}
+            <br><br>
+
+            <!-- Soft Delete -->
+            <form action="{% url 'soft_delete_product' product.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('Soft delete this product?')">Soft Delete</button>
+            </form>
+
+            <!-- Hard Delete -->
+            <form action="{% url 'hard_delete_product' product.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('Hard delete this product?')">Hard Delete</button>
+            </form>
+
+            <a href="{% url 'product_update' product.id %}">
+                <button>Update</button>
+            </a>
+
+        </li>
+        <hr>
+    {% empty %}
+        <p>No products available.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

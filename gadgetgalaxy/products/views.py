@@ -1,15 +1,20 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-
+from django.views.generic import ListView
 from category.models import Category
 from products.models import Products
 
 from .forms import ProductForm
 
 # Create your views here.
-def product_list(request):
-    products = Products.getall()
-    return render(request, 'product/list.html', {'products': products})
+# def product_list(request):
+#     products = Products.getall()
+#     return render(request, 'product/list.html', {'products': products})
+
+class ProductListView(ListView):
+    model = Products
+    template_name = 'product/list2.html'
+    context_object_name = 'products' 
 
 # def product_new(request):
 #     if request.method == 'POST':

@@ -8,3 +8,6 @@ class Category(models.Model):
     @classmethod
     def get_category_by_id(cls, category_id):
         return cls.objects.get(pk=category_id)
+    
+    def __str__(self):
+        return self.name

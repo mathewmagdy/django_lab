@@ -1,11 +1,28 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
-def category_list (request):
-    return HttpResponse("<h1>category_list</h1>")
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Category
 
-def category_new (request):
-    return HttpResponse("<h1>category_new</h1>")
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'category/list.html'
+    context_object_name = 'categories'
 
-def category_update (request , id):
-    return HttpResponse(f"<h1>category {id}</h1>")
+
+class CategoryCreateView(CreateView):
+    model = Category
+    fields = ['name']
+    template_name = 'category/form.html'
+    success_url = reverse_lazy('category_list')
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    fields = ['name']
+    template_name = 'category/form.html'
+    success_url = reverse_lazy('category_list')
+
+
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'category/confirm_delete.html'
+    success_url = reverse_lazy('category_list')

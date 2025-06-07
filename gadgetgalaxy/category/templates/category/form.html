@@ -1,0 +1,12 @@
+{% extends 'parent.html' %}
+{% block title %}Category Form{% endblock %}
+
+{% block content %}
+<h2>{{ view.object.pk|yesno:"Edit Category,Add Category" }}</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'category_list' %}">Back to list</a>
+{% endblock %}

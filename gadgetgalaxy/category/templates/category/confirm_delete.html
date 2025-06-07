@@ -1,0 +1,11 @@
+{% extends 'parent.html' %}
+{% block title %}Delete Category{% endblock %}
+
+{% block content %}
+<h2>Are you sure you want to delete "{{ object.name }}"?</h2>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'category_list' %}">Cancel</a>
+</form>
+{% endblock %}

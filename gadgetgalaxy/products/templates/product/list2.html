@@ -33,6 +33,10 @@
                 <button>Update</button>
             </a>
 
+            <a href="{% url 'product_delete' pk=product.pk %}">
+                <button> Delete </button>
+            </a>
+
         </li>
         <hr>
     {% empty %}

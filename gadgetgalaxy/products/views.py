@@ -1,5 +1,7 @@
+from django.views.generic import DeleteView
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import ListView
 from category.models import Category
 from products.models import Products
@@ -94,3 +96,9 @@ def product_update(request, pk):
         form = ProductForm(instance=product)
 
     return render(request, 'product/update2.html', {'form': form, 'product': product})
+
+class ProductDeleteView(DeleteView):
+    model = Products
+    template_name = 'product/confirm_delete.html'
+    success_url = reverse_lazy('product_list')
+    context_object_name = 'product'

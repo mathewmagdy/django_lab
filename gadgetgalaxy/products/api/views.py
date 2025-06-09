@@ -35,24 +35,34 @@
 #         return JsonResponse(form.errors, status=400)
 
 
-from rest_framework.generics import UpdateAPIView , RetrieveAPIView ,DestroyAPIView
+# from rest_framework.generics import UpdateAPIView , RetrieveAPIView ,DestroyAPIView
+# from products.models import Products
+# from products.api.serializers import ProductSerializer
+
+
+
+# class ProductUpdateView(UpdateAPIView):
+#     queryset = Products.objects.all()
+#     serializer_class = ProductSerializer
+#     lookup_field = 'id'
+
+
+# class ProductDetailView(RetrieveAPIView):
+#     queryset = Products.objects.all()
+#     serializer_class = ProductSerializer
+#     lookup_field = 'id'
+
+# class ProductDeleteView(DestroyAPIView):
+#     queryset = Products.objects.all()
+#     serializer_class = ProductSerializer
+#     lookup_field = 'id'
+
+
+
+from rest_framework import viewsets
 from products.models import Products
-from products.api.serializers import ProductSerializer
+from .serializers import ProductSerializer
 
-
-
-class ProductUpdateView(UpdateAPIView):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = ProductSerializer
-    lookup_field = 'id'
-
-
-class ProductDetailView(RetrieveAPIView):
-    queryset = Products.objects.all()
-    serializer_class = ProductSerializer
-    lookup_field = 'id'
-
-class ProductDeleteView(DestroyAPIView):
-    queryset = Products.objects.all()
-    serializer_class = ProductSerializer
-    lookup_field = 'id'
